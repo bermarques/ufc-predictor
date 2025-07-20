@@ -18,7 +18,7 @@ export interface Fight {
   eventDate: string;
   eventLocation: string;
   isMainEvent: boolean;
-  status: 'upcoming' | 'live' | 'completed';
+  status: "upcoming" | "live" | "completed";
 }
 
 export interface AIPrediction {
@@ -29,4 +29,25 @@ export interface AIPrediction {
   keyFactors: string[];
   oddsShift: number;
   lastUpdated: string;
+}
+
+export interface ScrapedFighter {
+  name: string;
+  record: string;
+  country: string;
+  picture: string;
+  link: string;
+}
+
+export interface ScrapedFight {
+  main: boolean;
+  weight: string;
+  fighterA: ScrapedFighter;
+  fighterB: ScrapedFighter;
+}
+export interface ScrapedEvent {
+  title: string;
+  date: string;
+  link: string;
+  fights: ScrapedFight[];
 }

@@ -6,25 +6,14 @@ import { Calendar, MapPin, Star, Zap } from "lucide-react";
 
 interface FightCardProps {
   fight: Fight;
-  prediction?: AIPrediction;
+  fightDate: string;
 }
 
-export const FightCard: React.FC<FightCardProps> = ({ fight, prediction }) => {
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  };
+export const FightCard: React.FC<FightCardProps> = ({ fight, fightDate }) => {
+  const prediction = fight.prediction;
 
-  const isWinner = (fighterId: string) => {
-    return (
-      prediction?.predictedWinner ===
-      (fighterId === fight.fighter1.id
-        ? fight.fighter1.name
-        : fight.fighter2.name)
-    );
+  const isWinner = (fighterName: string) => {
+    return prediction?.winner === fighterName;
   };
 
   return (
@@ -48,7 +37,7 @@ export const FightCard: React.FC<FightCardProps> = ({ fight, prediction }) => {
         <div className="flex items-center space-x-4 text-gray-400 text-sm">
           <div className="flex items-center space-x-1">
             <Calendar className="h-4 w-4" />
-            <span>{formatDate(fight.eventDate)}</span>
+            <span>{fightDate}</span>
           </div>
           <div className="flex items-center space-x-1">
             <MapPin className="h-4 w-4" />
@@ -60,8 +49,8 @@ export const FightCard: React.FC<FightCardProps> = ({ fight, prediction }) => {
       <div className="mb-6">
         <div className="flex gap-4 flex-col sm:flex-row ">
           <FighterCard
-            fighter={fight.fighter1}
-            isWinner={isWinner(fight.fighter1.id)}
+            fighter={fight.fighterA}
+            isWinner={isWinner(fight.fighterA.name)}
           />
 
           <div className="flex items-center justify-center">
@@ -71,8 +60,8 @@ export const FightCard: React.FC<FightCardProps> = ({ fight, prediction }) => {
           </div>
 
           <FighterCard
-            fighter={fight.fighter2}
-            isWinner={isWinner(fight.fighter2.id)}
+            fighter={fight.fighterB}
+            isWinner={isWinner(fight.fighterB.name)}
           />
         </div>
       </div>

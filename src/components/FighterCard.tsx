@@ -9,7 +9,7 @@ interface FighterCardProps {
 
 export const FighterCard: React.FC<FighterCardProps> = ({
   fighter,
-  isWinner,
+  isWinner = false,
 }) => {
   return (
     <div
@@ -28,7 +28,7 @@ export const FighterCard: React.FC<FighterCardProps> = ({
       <div className="flex items-center space-x-4">
         <div className="relative">
           <img
-            src={fighter.photo}
+            src={fighter.picture}
             alt={fighter.name}
             className="w-16 h-16 rounded-full object-cover ring-2 ring-red-500/50"
           />
@@ -40,15 +40,18 @@ export const FighterCard: React.FC<FighterCardProps> = ({
         </div>
 
         <div className="flex-1 min-w-0">
-          <h3 className="font-bold text-lg text-white truncate">
-            {fighter.name}
-          </h3>
+          <div className="flex gap-2 items-center">
+            <h3 className="font-bold text-lg text-white truncate">
+              {fighter.name}
+            </h3>
+            <img src={fighter.country} alt="country flag" width={20} />
+          </div>
           <p className="text-gray-300 text-sm">{fighter.record}</p>
-          <div className="flex items-center space-x-2 mt-1">
+          {/* <div className="flex items-center space-x-2 mt-1">
             <MapPin className="h-3 w-3 text-gray-400" />
             <span className="text-gray-400 text-xs">{fighter.country}</span>
             <span className="text-gray-400 text-xs">• {fighter.age} anos</span>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

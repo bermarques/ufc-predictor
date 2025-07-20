@@ -1,5 +1,5 @@
-import React from 'react';
-import { Zap, Brain } from 'lucide-react';
+import React from "react";
+import { Zap, Brain } from "lucide-react";
 
 export const Header: React.FC = () => {
   return (
@@ -12,15 +12,19 @@ export const Header: React.FC = () => {
                 <Zap className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-white">UFC Predictions</h1>
+                <h1 className="text-xl font-bold text-white">
+                  UFC Predictions
+                </h1>
                 <p className="text-xs text-gray-400">Powered by AI</p>
               </div>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-2 bg-purple-600/20 px-3 py-1 rounded-full">
             <Brain className="h-4 w-4 text-purple-400" />
-            <span className="text-purple-300 text-sm font-medium">IA Ativa</span>
+            <span className="text-purple-300 text-sm font-medium">
+              Active AI
+            </span>
           </div>
         </div>
       </div>
