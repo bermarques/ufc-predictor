@@ -34,7 +34,7 @@ export const FighterCard: React.FC<FighterCardProps> = ({
           />
           {fighter.rank && (
             <div className="absolute -bottom-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
-              #{fighter.rank}
+              {fighter.rank}
             </div>
           )}
         </div>

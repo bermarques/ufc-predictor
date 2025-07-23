@@ -25,6 +25,11 @@ function App() {
     }
   }, [selectedFilter, data?.fights]);
 
+  const eventTitleSplit = () => {
+    const split = data?.title.split(":");
+    return [split?.[0], split?.[1]];
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
       <Header />
@@ -33,7 +38,8 @@ function App() {
         {/* Hero Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-            <span className="text-red-500">UFC</span> Previsions
+            <span className="text-red-500">{eventTitleSplit()[0]}:</span>
+            {eventTitleSplit()[1]}
           </h1>
           <p className="text-xl text-gray-300 mb-2">
             Smart predictions for each UFC fight
@@ -45,7 +51,6 @@ function App() {
 
         {/* Stats Section */}
         {/* <StatsSection /> */}
-
         {/* Filters */}
         <FilterBar
           selectedFilter={selectedFilter}
@@ -61,6 +66,10 @@ function App() {
                   key={crypto.randomUUID()}
                   fight={fight}
                   fightDate={data?.date}
+                  fightLocation={{
+                    locationCountry: data?.locationFlag,
+                    locationName: data?.location,
+                  }}
                 />
               );
             })
@@ -76,7 +85,7 @@ function App() {
         {/* Footer */}
         <footer className="mt-16 py-8 border-t border-gray-800">
           <div className="text-center text-gray-400">
-            <p>© 2024 UFC Predictions.</p>
+            <p>© 2025 UFC Predictions.</p>
             <p className="mt-2 text-sm">
               Previsions based in machine learning algorithms and statistical
               analysis.

@@ -3,17 +3,55 @@ import { Fight, AIPrediction } from "../types";
 import { FighterCard } from "./FighterCard";
 import { PredictionCard } from "./PredictionCard";
 import { Calendar, MapPin, Star, Zap } from "lucide-react";
+import Belt from "./Belt";
 
 interface FightCardProps {
   fight: Fight;
   fightDate: string;
+  fightLocation: fightLocation;
 }
 
-export const FightCard: React.FC<FightCardProps> = ({ fight, fightDate }) => {
+interface fightLocation {
+  locationName: string;
+  locationCountry: string;
+}
+
+export const FightCard: React.FC<FightCardProps> = ({
+  fight,
+  fightDate,
+  fightLocation,
+}) => {
   const prediction = fight.prediction;
 
   const isWinner = (fighterName: string) => {
     return prediction?.winner === fighterName;
+  };
+
+  const getWeightClass = (weightClass: string) => {
+    switch (weightClass) {
+      case "265":
+        return "Heavyweight";
+      case "205":
+        return "Light Heavyweight";
+      case "185":
+        return "Middleweight";
+      case "170":
+        return "Welterweight";
+      case "155":
+        return "Lightweight";
+      case "145":
+        return "Featherweight";
+      case "135":
+        return "Bantamweight";
+      case "125":
+        return "Flyweight";
+      case "115":
+        return "Strawweight";
+      case "105":
+        return "Atomweight";
+      default:
+        return weightClass + "lbs";
+    }
   };
 
   return (
@@ -29,9 +67,22 @@ export const FightCard: React.FC<FightCardProps> = ({ fight, fightDate }) => {
               </span>
             )}
           </div>
-          <span className="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm">
-            {fight.weightClass}
-          </span>
+          <div className="flex gap-4">
+            {fight.belt && (
+              <img
+                src="src/components/icons/belt.png"
+                width={40}
+                style={{
+                  filter:
+                    "invert(100%) sepia(100%) saturate(1%) hue-rotate(180deg) brightness(108%) contrast(101%)",
+                }}
+              />
+            )}
+
+            <span className="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm">
+              {getWeightClass(fight.weight)}
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center space-x-4 text-gray-400 text-sm">
@@ -41,7 +92,14 @@ export const FightCard: React.FC<FightCardProps> = ({ fight, fightDate }) => {
           </div>
           <div className="flex items-center space-x-1">
             <MapPin className="h-4 w-4" />
-            <span>{fight.eventLocation}</span>
+            <span className="flex items-center gap-2">
+              {fightLocation?.locationName}
+              <img
+                src={fightLocation.locationCountry}
+                alt="country flag"
+                width={20}
+              />
+            </span>
           </div>
         </div>
       </div>
